@@ -1,9 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-// #include <Config.hpp>
+#include "Config.hpp"
+#include "Tree.hpp"
+#include "Cell.hpp"
+#include "Genome.hpp"
+
+using namespace std;
 
 int main()
 {
+    Genome gen_test;
+
+    cout << gen_test << endl;
+
     sf::RenderWindow window(sf::VideoMode(1024, 400), "Digital Trees");
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(60);
