@@ -14,4 +14,5 @@ private:
 public:
     Genome();
     friend std::ostream& operator<<(std::ostream& os, const Genome& gen);
+    int set_gene(std::array<uint8_t, GENOME_SIZE>&);
 };
