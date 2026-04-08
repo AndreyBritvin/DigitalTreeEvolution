@@ -1,0 +1,6 @@
+{
+    "makefile.configureOnOpen": true,
+     "C_Cpp.default.includePath": [
+        "include/core"
+    ],
+}
