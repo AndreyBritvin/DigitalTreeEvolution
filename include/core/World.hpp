@@ -16,5 +16,5 @@ public:
     int create_cell(int x, int y, int active_gene, Tree& tree, Cell_state state);
 
     int cell_count() {return grid_.size();};
-    auto get_cell(int x, int y) {return grid_[x][y].get();};
+    auto get_cell_at(int x, int y) {return grid_[x][y].get();};
 };

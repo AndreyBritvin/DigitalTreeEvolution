@@ -1,6 +1,9 @@
 {
     "makefile.configureOnOpen": true,
      "C_Cpp.default.includePath": [
-        "include/core"
+        "include/core",
+        "include/rendering",
+        "include/simulation",
+        "include/utils"
     ],
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Genome.hpp"
+#include <SFML/Graphics.hpp>
 
 enum Tree_state {DEAD, ALIVE};
 
@@ -23,4 +24,5 @@ public:
     : color_(color), gene_(gene), id_(id), age_(age){};
     
     auto get_genome() {return gene_;};
+    auto get_color() {return color_;};
 };

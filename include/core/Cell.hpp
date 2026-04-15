@@ -23,5 +23,5 @@ public:
     Cell(int x, int y, int active_gene, Tree& tree, int state): x_(x), y_(y), state_(state), active_gen_(active_gene), tree(tree) {};
 
     auto get_tree() {return tree;};
-    
+    auto get_state() {return state_;};
 };
