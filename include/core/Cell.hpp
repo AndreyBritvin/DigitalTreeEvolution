@@ -24,4 +24,5 @@ public:
 
     auto get_tree() {return tree;};
     auto get_state() {return state_;};
+    auto get_energy() {return energy_;}
 };

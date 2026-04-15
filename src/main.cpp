@@ -22,12 +22,12 @@ int main()
     Tree test_tree(color, gen_test, 1, 0);
 
     World world;
-    world.create_cell(50, 50, 0, test_tree, GROWING);
+    world.create_cell(10, 10, 0, test_tree, GROWING);
     cout << "Cell count is " << world.cell_count() << endl;
-    cout << "Cell`s genome at 50 50 is " << world.get_cell_at(50, 50)->get_tree().get_genome() << endl;
+    cout << "Cell`s genome at 50 50 is " << world.get_cell_at(10, 10)->get_tree().get_genome() << endl;
 
 
-    sf::RenderWindow window(sf::VideoMode(1024, 400), "Digital Trees");
+    sf::RenderWindow window(sf::VideoMode(1600, 800), "Digital Trees");
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(60);
     
@@ -35,13 +35,11 @@ int main()
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed) window.close();
-        }
-        rend.render_world();        
-        // window.clear(sf::Color(30, 30, 30));    
+        rend.handle_event();
+        window.clear(sf::Color(30, 30, 30));    
+        rend.render_world();
+        //rend.render_UI();
+        rend.render_overlays();        
         window.display();
     }
 

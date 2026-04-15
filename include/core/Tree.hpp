@@ -25,4 +25,6 @@ public:
     
     auto get_genome() {return gene_;};
     auto get_color() {return color_;};
+    auto get_age() {return age_;};
+    auto get_id() {return id_;};
 };

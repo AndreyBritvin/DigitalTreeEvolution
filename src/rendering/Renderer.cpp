@@ -30,3 +30,87 @@ void Renderer::render_world()
         } 
     }
 }
+
+int Renderer::calc_opt_cell_size()
+{
+    sf::Vector2u windowSize = window_.getSize();
+    
+    int maxWidth =  (windowSize.x - 2 * MARGIN) / WORLD_WIDTH;
+    int maxHeight = (windowSize.y - 2 * MARGIN /*- UI_HEIGHT*/) / WORLD_HEIGHT;
+    
+    return std::min(maxWidth, maxHeight);
+}
+
+void Renderer::render_overlays()
+{
+    for (int x = 0; x < WORLD_WIDTH; ++x) {
+        for (int y = 0; y < WORLD_HEIGHT; ++y) {
+
+            Cell* cell = world_.get_cell_at(x, y);
+            if (!cell || cell->get_state() == DEAD) continue;
+            
+            Tree tree = cell->get_tree();
+            
+            //center of cell
+            float px = MARGIN + x * CELL_SIZE + CELL_SIZE / 2.0f;
+            float py = MARGIN + (WORLD_HEIGHT - 1 - y) * CELL_SIZE + CELL_SIZE / 2.0f;
+
+            sf::Text text;
+            text.setFont(font_);
+            text.setCharacterSize(std::max(8, CELL_SIZE - 2)); 
+            text.setFillColor(sf::Color::Black);
+
+            if (show_Age_overlay_)
+            {
+                text.setString(std::to_string(tree.get_age()));
+                text.setPosition(px - text.getLocalBounds().width / 2, 
+                                py - text.getLocalBounds().height / 2);
+                window_.draw(text);
+            }
+             if (show_Energy_overlay_) {
+                // int energy = (cell->state() =='' Cell::GROWING) ? 
+                            // cell->energy() : tree.get_energy();
+                int energy = cell->get_energy();
+                text.setString(std::to_string(energy));
+                text.setPosition(px - text.getLocalBounds().width / 2, 
+                                py - text.getLocalBounds().height / 2);
+                window_.draw(text);
+            }
+            
+            if (show_Id_overlay_) {
+                text.setString(std::to_string(tree.get_id()));
+                text.setPosition(px - text.getLocalBounds().width / 2, 
+                                py - text.getLocalBounds().height / 2);
+                window_.draw(text);
+            }
+        }
+    }
+}
+
+void Renderer::handle_event()
+{
+    sf::Event event;
+    while (window_.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed) window_.close();
+        else if (event.type == sf::Event::Resized) {CELL_SIZE = calc_opt_cell_size();}
+        else if (event.type == sf::Event::KeyPressed) {
+            // if (event.key.code == sf::Keyboard::Space) {
+            //     paused_ = !paused_;
+            //} 
+            if (event.key.code == sf::Keyboard::A) {
+                show_Age_overlay_ = !show_Age_overlay_;
+                std::cout << "changed to " << show_Age_overlay_ << std::endl;
+            } 
+            else if (event.key.code == sf::Keyboard::E) {
+                show_Energy_overlay_ = !show_Energy_overlay_;
+            } 
+            else if (event.key.code == sf::Keyboard::I) {
+                show_Id_overlay_ = !show_Id_overlay_;
+            } 
+            else if (event.key.code == sf::Keyboard::Escape) {
+                window_.close();
+            }
+        }
+    }
+}
