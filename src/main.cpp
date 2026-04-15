@@ -4,6 +4,7 @@
 #include "Tree.hpp"
 #include "Cell.hpp"
 #include "Genome.hpp"
+#include "World.hpp"
 #include <array>
 
 using namespace std;
@@ -14,6 +15,14 @@ int main()
     Genome gen_test;
     gen_test.set_gene(test_gen_seq);
     cout << gen_test << endl;
+
+    tree_color color = {128, 128, 128};
+    Tree test_tree(color, gen_test, 1, 0);
+
+    World world;
+    world.create_cell(50, 50, 0, test_tree, GROWING);
+    cout << "Cell count is " << world.cell_count() << endl;
+    cout << "Cell`s genome at 50 50 is " << world.get_cell(50, 50)->get_tree().get_genome() << endl;
 
     // sf::RenderWindow window(sf::VideoMode(1024, 400), "Digital Trees");
     // window.setVerticalSyncEnabled(false);
