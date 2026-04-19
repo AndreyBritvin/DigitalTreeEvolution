@@ -58,7 +58,7 @@ void Renderer::render_overlays()
             sf::Text text;
             text.setFont(font_);
             text.setCharacterSize(std::max(8, CELL_SIZE - 2)); 
-            text.setFillColor(sf::Color::Black);
+            text.setFillColor(sf::Color::Red);
 
             if (show_Age_overlay_)
             {

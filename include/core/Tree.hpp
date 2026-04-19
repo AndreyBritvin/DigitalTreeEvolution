@@ -20,6 +20,9 @@ private:
     int age_;
     
 public:
+
+    int energy = 0;
+    
     Tree(tree_color color, Genome gene, unsigned long id, int age)
     : color_(color), gene_(gene), id_(id), age_(age){};
     

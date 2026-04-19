@@ -4,7 +4,7 @@
 enum Cell_state 
 {
     EMPTY, 
-    BARK,
+    WOOD,
     GROWING, 
     FALLING
 };
@@ -25,4 +25,5 @@ public:
     auto get_tree() {return tree;};
     auto get_state() {return state_;};
     auto get_energy() {return energy_;}
+    auto set_energy(int energy) {energy_ = energy;}
 };
