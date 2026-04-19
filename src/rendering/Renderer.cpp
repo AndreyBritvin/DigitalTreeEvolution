@@ -100,7 +100,6 @@ void Renderer::handle_event()
             //} 
             if (event.key.code == sf::Keyboard::A) {
                 show_Age_overlay_ = !show_Age_overlay_;
-                std::cout << "changed to " << show_Age_overlay_ << std::endl;
             } 
             else if (event.key.code == sf::Keyboard::E) {
                 show_Energy_overlay_ = !show_Energy_overlay_;

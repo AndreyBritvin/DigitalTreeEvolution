@@ -19,9 +19,10 @@ void EnergySystem::distribute_sun_energy()
                 // Древесина и семена получают энергию дерева
                 // cell->tree()->add_energy(energy);
             } 
-            else if (cell->get_energy() == GROWING) 
+            else if (cell->get_state() == GROWING) 
             {
                 // Отростки получают свою собственную энергию
+                // std::cout << "y="<< y << " " << cell->get_energy() << std::endl;
                 cell->set_energy(cell->get_energy() + energy);
             }
             

@@ -6,6 +6,8 @@
 #include "Genome.hpp"
 #include "Renderer.hpp"
 #include "World.hpp"
+#include "EnergySystem.hpp"
+
 #include <array>
 
 using namespace std;
@@ -23,9 +25,15 @@ int main()
 
     World world;
     world.create_cell(10, 10, 0, test_tree, GROWING);
+    world.create_cell(10, 11, 0, test_tree, GROWING);
+    world.create_cell(10, 12, 0, test_tree, GROWING);
     cout << "Cell count is " << world.cell_count() << endl;
     cout << "Cell`s genome at 50 50 is " << world.get_cell_at(10, 10)->get_tree().get_genome() << endl;
 
+    EnergySystem ES(world);
+    ES.distribute_sun_energy();
+    ES.distribute_sun_energy();
+    ES.distribute_sun_energy();
 
     sf::RenderWindow window(sf::VideoMode(1600, 800), "Digital Trees");
     window.setVerticalSyncEnabled(false);
