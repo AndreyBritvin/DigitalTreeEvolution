@@ -7,6 +7,7 @@
 #include "Renderer.hpp"
 #include "World.hpp"
 #include "EnergySystem.hpp"
+#include "EvolutionManager.hpp"
 
 #include <array>
 
@@ -22,18 +23,25 @@ int main()
 
     tree_color color = {128, 128, 128};
     Tree test_tree(color, gen_test, 1, 0);
+    tree_color color2 = {128, 255, 128};
+    Tree test_tree2(color2, gen_test, 2, 0);
 
     World world;
     world.create_cell(10, 10, 0, test_tree, GROWING);
     world.create_cell(10, 11, 0, test_tree, GROWING);
     world.create_cell(10, 12, 0, test_tree, GROWING);
+    world.create_cell(20, 20, 0, test_tree2, GROWING);
     cout << "Cell count is " << world.cell_count() << endl;
     cout << "Cell`s genome at 50 50 is " << world.get_cell_at(10, 10)->get_tree().get_genome() << endl;
 
     EnergySystem ES(world);
+    EvolutionManager EV(world, ES);
     ES.distribute_sun_energy();
+    EV.process_growth();
     ES.distribute_sun_energy();
+    EV.process_growth();
     ES.distribute_sun_energy();
+    EV.process_growth();
 
     sf::RenderWindow window(sf::VideoMode(1600, 800), "Digital Trees");
     window.setVerticalSyncEnabled(false);
