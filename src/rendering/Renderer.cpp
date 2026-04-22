@@ -130,5 +130,30 @@ void Renderer::handle_event()
                 window_.close();
             }
         }
+        else if (event.type == sf::Event::MouseButtonPressed)
+        {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                int x = event.mouseButton.x;
+                int y = event.mouseButton.y;
+                handle_cell_click(x, y);
+            }
+        }
     }
+}
+
+void Renderer::handle_cell_click(int mouseX, int mouseY) {
+    int cellX = (mouseX - MARGIN) / CELL_SIZE;
+    int cellY = WORLD_HEIGHT - 1 - (mouseY - MARGIN) / CELL_SIZE;
+    
+    if (cellX < 0 || cellX >= WORLD_WIDTH || cellY < 0 || cellY >= WORLD_HEIGHT) {
+        return;
+    }
+    
+    Cell* cell = world_.get_cell_at(cellX, cellY);
+    if (!cell || cell->get_state() == EMPTY) {
+        std::cout << "Empty cell at (" << cellX << ", " << cellY << ")" << std::endl;
+        return;
+    }
+    
+    std::cout << *cell << std::endl;
 }

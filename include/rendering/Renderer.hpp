@@ -31,10 +31,11 @@ public:
     };
     
     sf::Color get_cell_color(Cell* cell);
-    
+  
     void render_world();
     void render_overlays();
 
+    void handle_cell_click(int mouseX, int mouseY);
     void handle_event();
     int  calc_opt_cell_size();
 };
