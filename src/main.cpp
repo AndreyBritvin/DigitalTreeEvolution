@@ -16,7 +16,9 @@ using namespace std;
 int main()
 {
     array<uint8_t, GENOME_SIZE> test_gen_seq = { 1, 2,  3,  0, 
-                                                15, 0, 15, 15};
+                                                16, 16, 16, 16,
+                                                16, 16, 16, 16,
+                                                16, 0, 16, 16};
     Genome gen_test;
     gen_test.set_gene(test_gen_seq);
     cout << gen_test << endl;
@@ -36,24 +38,14 @@ int main()
 
     EnergySystem ES(world);
     EvolutionManager EV(world, ES);
-    ES.distribute_sun_energy();
-    EV.process_growth();
-    ES.distribute_sun_energy();
-    EV.process_growth();
-    ES.distribute_sun_energy();
-    EV.process_growth();
-    ES.distribute_sun_energy();
-    EV.process_growth();
-    ES.distribute_sun_energy();
-    EV.process_growth();
-    ES.distribute_sun_energy();
-    EV.process_growth();
+
+    Simulation sim(world, ES, EV);
 
     sf::RenderWindow window(sf::VideoMode(1600, 800), "Digital Trees");
     window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(60);
     
-    Renderer rend(window, world);
+    Renderer rend(window, world, sim);
 
     while (window.isOpen())
     {

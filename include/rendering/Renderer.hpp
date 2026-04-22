@@ -3,12 +3,14 @@
 #include "World.hpp"
 #include "Tree.hpp"
 #include <SFML/Graphics.hpp>
+#include "Simulation.hpp"
 
 class Renderer
 {
 private:
     sf::Font font_;
     sf::RenderWindow& window_;
+    Simulation& sim_;
     World& world_;
     int CELL_SIZE = 5;
     int MARGIN = 10;
@@ -19,7 +21,7 @@ private:
     bool show_Gene_overlay_ = false;
     
 public:
-    Renderer(sf::RenderWindow& window, World& world): world_(world), window_(window) 
+    Renderer(sf::RenderWindow& window, World& world, Simulation& sim): world_(world), window_(window), sim_(sim) 
     {
         if (!font_.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf") &&
         !font_.loadFromFile("/System/Library/Fonts/SFNS.ttf") &&

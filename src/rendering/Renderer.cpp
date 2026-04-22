@@ -119,6 +119,9 @@ void Renderer::handle_event()
             else if (event.key.code == sf::Keyboard::G) {
                 show_Gene_overlay_ = !show_Gene_overlay_;
             } 
+            else if (event.key.code == sf::Keyboard::N) {//next
+                sim_.step();
+            } 
             else if (event.key.code == sf::Keyboard::Escape) {
                 window_.close();
             }

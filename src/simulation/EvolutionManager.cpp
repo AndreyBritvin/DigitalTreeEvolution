@@ -25,7 +25,7 @@ void EvolutionManager::process_growth() {
         std::array<uint8_t, 4> genes = tree.get_genome().get_gene_group(Gene);
         
         // TODO: think about reducing copypaste
-        int new_gene = genes[0];
+        int new_gene = genes[TOP];
         if (new_gene < 16 && y + 1 < WORLD_HEIGHT)
         {  // <16 = разрешён рост
             if (world_.is_position_free(x, y + 1)) 
@@ -34,7 +34,7 @@ void EvolutionManager::process_growth() {
             }
         }
         
-        new_gene = genes[1];        
+        new_gene = genes[LEFT];        
         if (new_gene < 16) 
         {
             int nx = (x == 0) ? WORLD_WIDTH - 1 : x - 1;  
@@ -44,7 +44,7 @@ void EvolutionManager::process_growth() {
             }
         }
         
-        new_gene = genes[2];
+        new_gene = genes[RIGHT];
         if (new_gene < 16) 
         {
             int nx = (x == WORLD_WIDTH - 1) ? 0 : x + 1;  
@@ -54,7 +54,7 @@ void EvolutionManager::process_growth() {
             }
         }
         
-        new_gene = genes[3];
+        new_gene = genes[BOTTOM];
         if (new_gene < 16 && y > 0) 
         {
             if (world_.is_position_free(x, y - 1)) 

@@ -27,7 +27,7 @@ public:
     bool is_position_free(int x, int y) 
     {
         if (grid_[x][y].get() == nullptr) return true;
-        return grid_[x][y].get()->get_state() != EMPTY;
+        return grid_[x][y].get()->get_state() == EMPTY;
     }
  
     // TODO: maybe it good idea
