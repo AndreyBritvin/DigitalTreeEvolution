@@ -16,7 +16,8 @@ private:
     bool show_Age_overlay_ = false;
     bool show_Energy_overlay_ = false;
     bool show_Id_overlay_ = false;
-
+    bool show_Gene_overlay_ = false;
+    
 public:
     Renderer(sf::RenderWindow& window, World& world): world_(world), window_(window) 
     {

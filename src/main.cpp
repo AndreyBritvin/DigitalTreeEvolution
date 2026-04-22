@@ -42,6 +42,12 @@ int main()
     EV.process_growth();
     ES.distribute_sun_energy();
     EV.process_growth();
+    ES.distribute_sun_energy();
+    EV.process_growth();
+    ES.distribute_sun_energy();
+    EV.process_growth();
+    ES.distribute_sun_energy();
+    EV.process_growth();
 
     sf::RenderWindow window(sf::VideoMode(1600, 800), "Digital Trees");
     window.setVerticalSyncEnabled(false);

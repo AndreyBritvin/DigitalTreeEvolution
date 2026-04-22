@@ -21,7 +21,7 @@ void EvolutionManager::process_growth() {
         int x = cell->get_x();
         int y = cell->get_y();
         int Gene = cell->get_active_gene();
-        Tree tree = cell->get_tree();
+        Tree& tree = cell->get_tree();
         std::array<uint8_t, 4> genes = tree.get_genome().get_gene_group(Gene);
         
         // TODO: think about reducing copypaste

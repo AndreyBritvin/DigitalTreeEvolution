@@ -25,7 +25,7 @@ public:
 
     auto get_x() {return x_;};
     auto get_y() {return y_;};
-    auto get_tree() {return tree;};
+    Tree& get_tree() {return tree;};
     auto get_state() {return state_;};
     auto get_energy() {return energy_;}
     auto set_energy(int energy) {energy_ = energy;}
