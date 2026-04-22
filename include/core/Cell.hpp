@@ -23,6 +23,8 @@ private:
 public:
     Cell(int x, int y, int active_gene, Tree& tree, int state): x_(x), y_(y), state_(state), active_gen_(active_gene), tree(tree) {};
 
+    friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
+
     auto get_x() {return x_;};
     auto get_y() {return y_;};
     void set_x(int x) {x_ = x;};

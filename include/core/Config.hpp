@@ -11,4 +11,4 @@ const int LEVEL_BIAS = 10;
 
 const int ENERGY_THRESHOLD = 100;
 
-const int AVERAGE_AGE = 20;
+const int AVERAGE_AGE = 100;
