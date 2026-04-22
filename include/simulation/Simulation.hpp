@@ -9,11 +9,13 @@ private:
     World& world_;
     EnergySystem& ES_;
     EvolutionManager& EV_;
-
+    int year_ = 0;
+    int generation_ = 0;
+    
 public:
     Simulation(World& world, EnergySystem& ES, EvolutionManager& EV) 
     : world_(world), ES_(ES), EV_(EV) {}
-    
+
     void step();
     
     void create_initial_population();

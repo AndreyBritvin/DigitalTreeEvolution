@@ -29,12 +29,12 @@ int main()
     Tree test_tree2(color2, gen_test, 2, 0);
 
     World world;
-    world.create_cell(10, 10, 0, test_tree, GROWING);
-    world.create_cell(10, 11, 0, test_tree, GROWING);
-    world.create_cell(10, 12, 0, test_tree, GROWING);
-    world.create_cell(20, 20, 0, test_tree2, GROWING);
+    world.create_cell(10, 0, 0, test_tree, GROWING);
+    world.create_cell(11, 0, 0, test_tree, GROWING);
+    world.create_cell(12, 0, 0, test_tree, GROWING);
+    world.create_cell(20, 0, 0, test_tree2, GROWING);
     cout << "Cell count is " << world.cell_count() << endl;
-    cout << "Cell`s genome at 50 50 is " << world.get_cell_at(10, 10)->get_tree().get_genome() << endl;
+    // cout << "Cell`s genome at 50 50 is " << world.get_cell_at(10, 10)->get_tree().get_genome() << endl;
 
     EnergySystem ES(world);
     EvolutionManager EV(world, ES);

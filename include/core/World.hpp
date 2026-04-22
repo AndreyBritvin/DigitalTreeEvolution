@@ -23,6 +23,9 @@ public:
 
     auto get_trees_list() {return &tree_pool_;}
     
+    void kill_trees();
+    void move_cell_down(int x, int y);
+
     // TODO: think about FALLING
     bool is_position_free(int x, int y) 
     {

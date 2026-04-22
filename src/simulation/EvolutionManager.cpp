@@ -67,3 +67,42 @@ void EvolutionManager::process_growth() {
         cell->set_energy(cell->get_energy() - 100);// TODO: redo via consume energy
     }
 }
+
+void EvolutionManager::process_falling()
+{
+    std::vector<Cell*> cells_to_fall;
+    for (int x = 0; x < WORLD_WIDTH; ++x) 
+    {
+        for (int y = 0; y < WORLD_HEIGHT; ++y) 
+        {
+            Cell* cell = world_.get_cell_at(x, y);
+            if (cell != nullptr && cell->get_state() == FALLING) 
+            {
+                cells_to_fall.push_back(cell);
+            }
+        }
+    }
+
+    for (Cell* cell : cells_to_fall)
+    {
+        int x = cell->get_x();
+        int y = cell->get_y();
+        std::cout << "Processing cell at " << x << " " << y << std::endl;  
+        Tree& tree = cell->get_tree();
+        if (y == 0)
+        {
+            cell->set_state(GROWING);
+            continue;
+        }
+
+        if (!world_.is_position_free(x, y - 1))
+        {
+            cell->kill();
+        }
+        else
+        {
+            world_.move_cell_down(x, y);
+            Cell* cell2 = world_.get_cell_at(x, y-1);
+        }
+    }
+}

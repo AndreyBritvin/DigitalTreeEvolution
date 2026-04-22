@@ -10,3 +10,5 @@ const int SUN_PENETRATION = 3;
 const int LEVEL_BIAS = 10;
 
 const int ENERGY_THRESHOLD = 100;
+
+const int AVERAGE_AGE = 20;

@@ -5,7 +5,11 @@
 sf::Color Renderer::get_cell_color(Cell* cell)
 {
     tree_color color = cell->get_tree().get_color();
-    
+    if (cell->get_state() == GROWING) 
+    {
+        return sf::Color::White;
+    }
+
     return sf::Color(color.r, color.g, color.b); // TODO: make dependency on type
 }
 
