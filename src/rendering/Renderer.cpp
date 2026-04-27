@@ -108,10 +108,10 @@ void Renderer::handle_event()
         if (event.type == sf::Event::Closed) window_.close();
         else if (event.type == sf::Event::Resized) {CELL_SIZE = calc_opt_cell_size();}
         else if (event.type == sf::Event::KeyPressed) {
-            // if (event.key.code == sf::Keyboard::Space) {
-            //     paused_ = !paused_;
-            //} 
-            if (event.key.code == sf::Keyboard::A) {
+            if (event.key.code == sf::Keyboard::Space) {
+                paused_ = !paused_;
+            } 
+            else if (event.key.code == sf::Keyboard::A) {
                 show_Age_overlay_ = !show_Age_overlay_;
             } 
             else if (event.key.code == sf::Keyboard::E) {
@@ -156,4 +156,35 @@ void Renderer::handle_cell_click(int mouseX, int mouseY) {
     }
     
     std::cout << *cell << std::endl;
+}
+
+void Renderer::run()
+{
+    while (window_.isOpen())
+    {
+        if (!paused_)
+        {
+            
+            float deltaTime = simulationClock_.restart().asSeconds();
+            static float accumulator = 0.0f;
+            accumulator += deltaTime;
+
+            while (accumulator >= SIMULATION_DT) {
+                try {
+                    sim_.step();
+                } 
+                catch (const std::exception& e) {
+                    // TODO: extinction
+                    break;
+                }
+                accumulator -= SIMULATION_DT;
+            }
+        }
+        handle_event();
+        window_.clear(sf::Color(30, 30, 30));    
+        render_world();
+        //rend.render_UI();
+        render_overlays();        
+        window_.display();
+    }
 }

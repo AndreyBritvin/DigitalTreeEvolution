@@ -1,5 +1,6 @@
 #include "World.hpp"
 #include "Cell.hpp"
+#include "Random.hpp"
 
 World::World()
 {
@@ -33,6 +34,16 @@ void World::kill_trees()
             if (cell->get_state() == GROWING) 
             {
                 cell->set_state(FALLING);
+                cell->get_tree().add_id();
+                Genome gene = cell->get_tree().get_genome();
+                float mutation_chance = Random::instance().nextFloat();
+                if (mutation_chance < 0.25f)
+                {
+                    int gene_pos = Random::instance().nextInt(0, 64);
+                    int gene_value = Random::instance().nextInt(0, 32);
+                    gene[gene_pos] = gene_value;
+                }
+                cell->get_tree().set_genome(gene);
             }            
         }
     }

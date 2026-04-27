@@ -23,13 +23,14 @@ void EvolutionManager::process_growth() {
         int Gene = cell->get_active_gene();
         Tree& tree = cell->get_tree();
         std::array<uint8_t, 4> genes = tree.get_genome().get_gene_group(Gene);
-        
+        bool is_grown = false;
         // TODO: think about reducing copypaste
         int new_gene = genes[TOP];
         if (new_gene < 16 && y + 1 < WORLD_HEIGHT)
         {  // <16 = разрешён рост
             if (world_.is_position_free(x, y + 1)) 
             {
+                is_grown = true;
                 world_.create_cell(x, y + 1, new_gene, tree, GROWING);
             }
         }
@@ -40,6 +41,7 @@ void EvolutionManager::process_growth() {
             int nx = (x == 0) ? WORLD_WIDTH - 1 : x - 1;  
             if (world_.is_position_free(nx, y)) 
             {
+                is_grown = true;
                 world_.create_cell(nx, y, new_gene, tree, GROWING);
             }
         }
@@ -50,6 +52,7 @@ void EvolutionManager::process_growth() {
             int nx = (x == WORLD_WIDTH - 1) ? 0 : x + 1;  
             if (world_.is_position_free(nx, y)) 
             {
+                is_grown = true;
                 world_.create_cell(nx, y, new_gene, tree, GROWING);
             }
         }
@@ -59,12 +62,15 @@ void EvolutionManager::process_growth() {
         {
             if (world_.is_position_free(x, y - 1)) 
             {
+                is_grown = true;
                 world_.create_cell(x, y - 1, new_gene, tree, GROWING);
             }
         }
-
-        cell->set_state(WOOD);
-        cell->set_energy(cell->get_energy() - 100);// TODO: redo via consume energy
+        if (!is_grown)
+        {
+            cell->set_state(WOOD);
+            cell->set_energy(cell->get_energy() - 100);// TODO: redo via consume energy
+        }
     }
 }
 
@@ -87,7 +93,7 @@ void EvolutionManager::process_falling()
     {
         int x = cell->get_x();
         int y = cell->get_y();
-        std::cout << "Processing cell at " << x << " " << y << std::endl;  
+        // std::cout << "Processing cell at " << x << " " << y << std::endl;  
         Tree& tree = cell->get_tree();
         if (y == 0)
         {

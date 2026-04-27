@@ -8,17 +8,32 @@
 #include "World.hpp"
 #include "EnergySystem.hpp"
 #include "EvolutionManager.hpp"
-
+#include "Random.hpp"
 #include <array>
 
 using namespace std;
 
 int main()
 {
+    Random::instance().seed();
+
     array<uint8_t, GENOME_SIZE> test_gen_seq = { 1, 2,  3,  0, 
                                                 16, 16, 16, 16,
                                                 16, 16, 16, 16,
-                                                16, 0, 16, 16};
+                                                16, 0, 16, 16,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32,
+                                                32, 32, 32, 32
+                                            };
     Genome gen_test;
     gen_test.set_gene(test_gen_seq);
     cout << gen_test << endl;
@@ -46,16 +61,7 @@ int main()
     window.setFramerateLimit(60);
     
     Renderer rend(window, world, sim);
-
-    while (window.isOpen())
-    {
-        rend.handle_event();
-        window.clear(sf::Color(30, 30, 30));    
-        rend.render_world();
-        //rend.render_UI();
-        rend.render_overlays();        
-        window.display();
-    }
+    rend.run();
 
     return 0;
 }

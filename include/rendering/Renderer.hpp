@@ -12,6 +12,7 @@ private:
     sf::RenderWindow& window_;
     Simulation& sim_;
     World& world_;
+    sf::Clock simulationClock_; 
     int CELL_SIZE = 5;
     int MARGIN = 10;
 
@@ -19,6 +20,7 @@ private:
     bool show_Energy_overlay_ = false;
     bool show_Id_overlay_ = false;
     bool show_Gene_overlay_ = false;
+    bool paused_ = true;
     
 public:
     Renderer(sf::RenderWindow& window, World& world, Simulation& sim): world_(world), window_(window), sim_(sim) 
@@ -38,4 +40,5 @@ public:
     void handle_cell_click(int mouseX, int mouseY);
     void handle_event();
     int  calc_opt_cell_size();
+    void run();
 };
